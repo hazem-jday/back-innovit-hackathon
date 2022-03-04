@@ -24,6 +24,7 @@ func Connect() error {
 	}
 
 	Database.AutoMigrate(&entities.User{})
+	Database.AutoMigrate(&entities.Post{})
 
 	return nil
 }

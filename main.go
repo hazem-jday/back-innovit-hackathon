@@ -19,5 +19,11 @@ func main() {
 	app.Put("/users/:id", handlers.UpdateUser)
 	app.Delete("/users/:id", handlers.RemoveUser)
 
+	app.Get("/posts", handlers.GetPosts)
+	app.Get("/post/:id", handlers.GetPost)
+	app.Post("/posts", handlers.AddPost)
+	app.Put("/posts/:id", handlers.UpdatePost)
+	app.Delete("/posts/:id", handlers.RemovePost)
+
 	log.Fatal(app.Listen(":8080"))
 }

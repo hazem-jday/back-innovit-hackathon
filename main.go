@@ -24,26 +24,33 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host localhost:8080
+// @host localhost:8081
 // @BasePath /
 
 func main() {
+	//Initialisation du serveur
 	app := fiber.New()
 	config.Connect()
 
+	//Swagger router
 	app.Get("/swagger/*", fiberSwagger.WrapHandler)
 
+	// Routers de gestion des utilisateurs
+	app.Post("/login", handlers.Login)
+	app.Post("/signup", handlers.Signup)
 	app.Get("/users", handlers.GetUsers)
+	app.Get("/postsuser/:user", handlers.GetPostsByUser)
 	app.Get("/user/:id", handlers.GetUser)
-	app.Post("/users", handlers.AddUser)
 	app.Put("/users/:id", handlers.UpdateUser)
 	app.Delete("/users/:id", handlers.RemoveUser)
 
+	// Routers de gestion des publications
 	app.Get("/posts", handlers.GetPosts)
 	app.Get("/post/:id", handlers.GetPost)
 	app.Post("/posts", handlers.AddPost)
 	app.Put("/posts/:id", handlers.UpdatePost)
 	app.Delete("/posts/:id", handlers.RemovePost)
 
-	log.Fatal(app.Listen(":8080"))
+	// Démarrage
+	log.Fatal(app.Listen(":8081"))
 }

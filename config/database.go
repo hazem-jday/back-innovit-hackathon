@@ -8,9 +8,11 @@ import (
 	"gorm.io/gorm"
 )
 
+// Go ORM Database
 var Database *gorm.DB
-var DATABASE_URI string = "root:root@tcp(localhost:3306)/database?charset=utf8mb4&parseTime=True&loc=Local"
+var DATABASE_URI string = "user:pass@tcp(localhost:3306)/database?charset=utf8mb4&parseTime=True&loc=Local"
 
+//Connexion à la base
 func Connect() error {
 	var err error
 
@@ -23,6 +25,7 @@ func Connect() error {
 		panic(err)
 	}
 
+	//Initialisation des tableaux
 	Database.AutoMigrate(&entities.User{})
 	Database.AutoMigrate(&entities.Post{})
 
